@@ -1,15 +1,18 @@
-Question 1. Version of pip:
+# Question 1. Version of pip:
 
+```bash
 docker run -it --entrypoint bash python:3.12.8
 pip --version
 pip 24.3.1
+```
+# Question 2. Understanding Docker networking and docker-compose
 
-Question 2. Understanding Docker networking and docker-compose
+```
+db5433
+```
 
-db:5433
-
-Question 3. Trip Segmentation Count
-
+# Question 3. Trip Segmentation Count
+```sql
 SELECT
     COUNT(*) AS trip_count,
     CASE
@@ -23,17 +26,20 @@ FROM green_taxi
 WHERE lpep_pickup_datetime BETWEEN '2019-10-01' AND '2019-11-01'
 GROUP BY distance_range
 ORDER BY trip_count DESC;
+```
 
+```
 "trip_count"	"distance_range"
 198995	"Between 1 and 3 miles"
 109642	"Between 3 and 7 miles"
 104830	"Up to 1 mile"
 35201	"Over 10 miles"
 27686	"Between 7 and 10 miles"
+```
 
-Question 4. Longest trip for each day
+# Question 4. Longest trip for each day
 
-"""
+```sql
 SELECT 
     DATE(lpep_pickup_datetime) AS pickup_day,
     MAX(trip_distance) AS longest_trip_distance
@@ -41,17 +47,19 @@ FROM green_taxi
 WHERE DATE(lpep_pickup_datetime) IN ('2019-10-11', '2019-10-24', '2019-10-26', '2019-10-31')
 GROUP BY pickup_day
 ORDER BY pickup_day;
-"""
-"""
+```
+
+```
 "pickup_day"	"longest_trip_distance"
 "2019-10-11"	95.78
 "2019-10-24"	90.75
 "2019-10-26"	91.56
 "2019-10-31"	515.89
-"""
+```
 
-Question 5. Three biggest pickup zones
 
+# Question 5. Three biggest pickup zones
+```sql
 SELECT 
     z."Zone" AS pickup_location,
     SUM(g.total_amount) AS total_revenue
@@ -62,14 +70,16 @@ WHERE DATE(g.lpep_pickup_datetime) = '2019-10-18'
 GROUP BY z."Zone"
 HAVING SUM(g.total_amount) > 13000
 ORDER BY total_revenue DESC;
-
+```
+```
 "pickup_location"	"total_revenue"
 "East Harlem North"	18686.680000000077
 "East Harlem South"	16797.260000000068
 "Morningside Heights"	13029.79000000004
+```
 
-Question 6. Largest tip
-
+# Question 6. Largest tip
+```sql
 SELECT 
     dz."Zone" AS dropoff_zone,
     MAX(g.tip_amount) AS max_tip
@@ -84,9 +94,12 @@ WHERE
 GROUP BY dz."Zone"
 ORDER BY max_tip DESC
 LIMIT 1;
-
+```
+```
 Answer: JFK
+```
 
-Question 7. Terraform Workflow
+# Question 7. Terraform Workflow
 
+```
 terraform init, terraform apply -auto-approve, terraform destroy
