@@ -1,4 +1,5 @@
 # Answer 1.  20332093   
+
 ```sql
 SELECT COUNT(*) FROM `xxx`;
 ```
